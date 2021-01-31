@@ -1,9 +1,28 @@
+/*
+poder do Media Recorder, a API do browser para gravação de grupos de usuários em videoconferências.
+
+A gravacao eu enviava a cada 2 segundos pro back, no final eu disparava um evento e o back juntava tudo usando ffmpeg.
+Via ajax, 2 segundo para nao ficar um arquivo pesado de upload.
+EW: Boaaa sensacional! Daria para subir via stream (tenho um video aqui sobre upload de gigabytes de arquivos), eu acho excelente, só acho que pode ser meio difícil de sincronizar as coisas, mas é um desafio show de bola
+I:entao, 2seg de gravacao deve dar apenas alguns kb, nao deve passar nem de 500kb, entao o upload fica bem leve e transparente. Enviar gigabytes, o problema eh o tempo, terminou a videoconferencia, vai levar quanto tempo pra fazer o upload saca? no back so guardar a ordem, depois informar a ordem para o ffmpeg q ele junta tudo, nem precisa de muito esforço.
+
+ Browsers Compatíveis com o Media Recorder: https://caniuse.com/?search=media%20recorder
+▸ Reposta no StackOverflow sobre Regex: http://bit.ly/3iQKt3v
+LEITURA COMPLEMENTAR
+
+▸ WebRTC Basics: https://www.html5rocks.com/en/tutorials/webrtc/basics/
+▸ WebRTC Infrastructure: https://www.html5rocks.com/en/tutorials/webrtc/infrastructure/
+▸ WebRTC Recording PeerConnection Examples: https://webrtc.github.io/samples/src/content/peerconnection/multiple/
+▸ WebRTC & Media Recorder: https://webrtc.github.io/samples/src/content/getusermedia/record/
+
+*/
 class Recorder {
     constructor(userName, stream) {
         this.userName = userName
         this.stream = stream
 
-        this.filename = `id:${userName}-when:${Date.now()}`
+				this.filename = `id:${userName}-when:${Date.now()}`
+//p rodar esse tipo de video 'webm - web media', deve precisar instalar o vlc				
         this.videoType = 'video/webm'
 
         this.mediaRecorder = {}
@@ -21,7 +40,7 @@ class Recorder {
         const options = commonCodecs
             .map(codec => ({ mimeType: `${this.videoType};${codec}`}))
             .find(options => MediaRecorder.isTypeSupported(options.mimeType))
-        
+   //verifica quais codecs o browser suporta     
         if(!options) {
             throw new Error(`none of the codecs: ${commonCodecs.join(',')} are supported`)
         }
@@ -60,7 +79,8 @@ class Recorder {
         this.mediaRecorder.stop()
         
         this.recordingActive = false 
-        await Util.sleep(200)
+				await Util.sleep(200)
+//pensando em um pause e continue p n perder nd				
         this.completeRecordings.push([...this.recordedBlobs])
         this.recordedBlobs = []
     }

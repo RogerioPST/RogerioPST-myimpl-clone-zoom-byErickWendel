@@ -23,7 +23,7 @@ class View {
         }
 
         if (srcObject) {
-//qdo jah tiver carregado o header do arquivo, ja estiver preparado, ja pode dar play
+//qdo jah tiver carregado o header do arquivo (os metadados do arquivo), ja estiver preparado, ja pode dar play
             video.addEventListener("loadedmetadata", _ => video.play())
         }
 

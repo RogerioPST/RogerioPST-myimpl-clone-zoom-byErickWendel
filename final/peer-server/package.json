@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
+  "scripts": {		
     "dev": "PORT=9000 npm start",
     "start": "npx peerjs --port $PORT --key peerjs --path /"
   },

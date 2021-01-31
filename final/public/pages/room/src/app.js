@@ -29,6 +29,7 @@ const onload = () => {
 
 //values retorna um array	
   const peerConfig = Object.values({
+//passando como undefined, vai criar o id la no peer server		
     id: undefined,
     config: {
 		//projeto da pasta peer-server	
@@ -53,6 +54,7 @@ const onload = () => {
   }
 
 	Business.initialize(deps)
+//trocar de .gif p .mp4	p testar
 //view.renderVideo({ userId: 'test01', url: 'https://media.giphy.com/media/1pZ2kwvYvNMcX19x5z/giphy.mp4'})
 //view.renderVideo({ userId: 'test01', isCurrentId: true, url: 'https://media.giphy.com/media/1pZ2kwvYvNMcX19x5z/giphy.mp4'})
 //view.renderVideo({ userId: 'test01', url: 'https://media.giphy.com/media/1pZ2kwvYvNMcX19x5z/giphy.mp4'})
